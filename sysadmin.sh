@@ -2,13 +2,14 @@
 ## Criado em: quinta-feira 28/12/2017 - 0h16
 ## Autor: Robson Lopes
 ## Rotinas administrativas da ASF.COM
-## Versão 1.0
+## Versão 1.1
 
 if [ `uname -a | awk -F" " '{ print $6 }'` = "Debian" ]
 then
 	clear
 	echo "voce está em $HOSTNAME"
 	systemctl restart ntp && echo "reiniciando servidor ntp..."
+	sleep 10
 	ntpq -c pe > /dev/null && echo "atualizando hora..." || ntpdate -u 192.168.15.1 > /dev/null 
 
 	echo "hoje eh:" && date 
@@ -22,6 +23,7 @@ then
 	ping 4.2.2.2 -qc1 > /dev/null && echo "Internet.....UP" || "Internet.....DOWN" 
 	if [ $? = 0 ] 
 	then
+		sleep 5
 		echo "atualizando repositorio..." && apt-get upgrade > /dev/null
 	else
 		echo "Verifique configuracao da rede."
@@ -30,6 +32,7 @@ else
 	clear
 	echo "voce está em $HOSTNAME"
 	systemctl restart ntpd && echo "reiniciando servidor ntp..."
+	sleep 10
 	ntpq -c pe > /dev/null && echo "atualizando hora..." || ntpdate -u pool.ntp.br > /dev/null 
 	echo "hoje eh:" && date 
 
@@ -43,8 +46,9 @@ else
 	ping 4.2.2.2 -qc1 > /dev/null && echo "Internet.....UP" || "Internet.....DOWN" 
 	if [ $? = 0 ]
 	then
+		sleep 5
 		echo "atualizando repositorio..." && yum update > /dev/null
 	else
 		echo "Verifique configuracao da rede."
 	fi
-fi																																																
+fi																																														
