@@ -2,7 +2,7 @@
 ## Criado em: quinta-feira 28/12/2017 - 0h16
 ## Autor: Robson Lopes
 ## Rotinas administrativas da ASF.COM
-## Versão 1.1
+## Versão 1.2
 
 if [ `uname -a | awk -F" " '{ print $6 }'` = "Debian" ]
 then
@@ -24,7 +24,7 @@ then
 	if [ $? = 0 ] 
 	then
 		sleep 5
-		echo "atualizando repositorio..." && apt-get upgrade > /dev/null
+		echo "atualizando repositorio..." && aptitude -y upgrade > /dev/null
 	else
 		echo "Verifique configuracao da rede."
 	fi
@@ -47,7 +47,7 @@ else
 	if [ $? = 0 ]
 	then
 		sleep 5
-		echo "atualizando repositorio..." && yum update > /dev/null
+		echo "atualizando repositorio..." && yum -y update > /dev/null
 	else
 		echo "Verifique configuracao da rede."
 	fi
